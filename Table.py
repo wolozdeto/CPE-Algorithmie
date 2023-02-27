@@ -38,21 +38,18 @@ class Table:
         :param value: value to insert
         :return: True if successful, False otherwise
         """
-        i = 0
-        while i < len(self.table):
-            pos = self._rehash(key, i)
-            if self.table[pos] is None:
-                self.table[pos] = (key, value)
-                self.size += 1
-                if i > 0:
-                    self.rehash_count += 1
-                return
-            elif self.table[pos][0] == key:
-                self.table[pos] = (key, value)
-                return
-            else:
-                i += 1
-        raise Exception('Table is full')
+        pos = self.hash_func(key)
+        if self.table[pos] is None or self.table[pos] == value:
+            self.table[pos] = value
+            self.size += 1
+            return True
+        else:
+            for key in self.table:
+                if key is None:
+                    self.table[pos] = value
+                    self.size += 1
+                    return True
+            raise Exception('Table is full')
 
     def delete(self, key):
         """
@@ -60,17 +57,12 @@ class Table:
 
         :param key: key to delete
         """
-        i = 0
-        while i < len(self.table):
-            pos = self._rehash(key, i)
-            if self.table[pos] is None:
-                return
-            elif self.table[pos][0] == key:
-                self.table[pos] = None
-                self.size -= 1
-                return
-            else:
-                i += 1
+        pos = self.hash_func(key)
+        if self.table[pos] is None:
+            return False
+        self.table[pos] = None
+        self.size -= 1
+        return True
 
     def exist(self, key):
         """
@@ -79,16 +71,10 @@ class Table:
         :param key: key to check
         :return: True if key exists, False otherwise
         """
-        i = 0
-        while i < len(self.table):
-            pos = self._rehash(key, i)
-            if self.table[pos] is None:
-                return False
-            elif self.table[pos][0] == key:
-                return True
-            else:
-                i += 1
-        return False
+        pos = self.hash_func(key)
+        if self.table[pos] is None:
+            return False
+        return self.table[pos] is not None
 
     def value(self, key):
         """
@@ -97,16 +83,8 @@ class Table:
         :param key: key to check
         :return: value associated with key
         """
-        i = 0
-        while i < len(self.table):
-            pos = self._rehash(key, i)
-            if self.table[pos] is None:
-                return None
-            elif self.table[pos][0] == key:
-                return self.table[pos][1]
-            else:
-                i += 1
-        return None
+        pos = self.hash_func(key)
+        return self.table[pos]
 
     def union(self, other_table):
         """
@@ -115,18 +93,42 @@ class Table:
         :param other_table: other table to union with
         :return: new table that is the union of the current table and the other table
         """
-    def union(self, other_table):
         union_table = Table(len(self.table), self.hash_func, self.rehash_type)
-        for pos in range(len(self.table)):
-            if self.table[pos] is not None:
-                union_table.insert(self.table[pos][0], self.table[pos][1])
-        for pos in range(len(other_table.table)):
-            if other_table.table[pos] is not None:
-                union_table.insert(other_table.table[pos][0], other_table.table[pos][1])
+        for i in range(self.size):
+            if self.table[i] is not None:
+                union_table.insert(i, self.table[i])
+            if other_table.table[i] is not None:
+                union_table.insert(i, other_table.table[i])
         return union_table
+
+    def intersection(self, other_table):
+        """
+        Returns a new table that is the intersection of the current table and the other table
+
+        :param other_table: other table to intersect with
+        :return: new table that is the intersection of the current table and the other table
+        """
+        intersection_table = Table(len(self.table), self.hash_func, self.rehash_type)
+        for i in range(self.size):
+            if self.table[i] is not None and other_table.table[i] is not None:
+                intersection_table.insert(i, self.table[i])
+        return intersection_table
+
+    def display(self):
+        """
+        Displays the table
+        """
+        print('Table: {}'.format(self.table))
 
 
 def test_table(size=5, hash_func=lambda x: x % 5, rehash_type='linear'):
+    """
+    Tests the Table class
+
+    :param size: size of table
+    :param hash_func: hash function to use
+    :param rehash_type: rehash function to use
+    """
     # Create table with size 5, hash function f(x) = x % 5, and linear rehashing
     table = Table(size, hash_func, rehash_type)
 
@@ -135,7 +137,7 @@ def test_table(size=5, hash_func=lambda x: x % 5, rehash_type='linear'):
         table.insert(i, i)
     assert table.size == 5
     assert table.rehash_count == 0
-    assert table.table == [(0, 0), (1, 1), (2, 2), (3, 3), (4, 4)]
+    assert table.table == [0, 1, 2, 3, 4]
 
     # Delete key/value pairs
     for i in range(5):
@@ -151,12 +153,20 @@ def test_table(size=5, hash_func=lambda x: x % 5, rehash_type='linear'):
     assert table.size == 5
     assert table.rehash_count == 0
 
+    # Check value of key
+    for i in range(5):
+        assert table.value(i) == i
+
     # Check union of two tables
     table2 = Table(size, hash_func, rehash_type)
-    for i in range(5):
-        table2.insert(i, 4-i)
+    for i in range(1, 6):
+        table2.insert(i, i)
     union_table = table.union(table2)
-    print(union_table.table)
+    union_table.display()
+
+    # Check intersection of two tables
+    intersection_table = table2.intersection(table)
+    intersection_table.display()
 
 
 test_table(size=5, hash_func=lambda x: x % 5, rehash_type='linear')
