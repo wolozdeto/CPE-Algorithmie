@@ -1,3 +1,9 @@
+import time
+import random
+import matplotlib.pyplot as plt
+from tqdm import tqdm
+
+
 class Table:
     def __init__(self, table_size, hash_func, rehash_type):
         """
@@ -7,10 +13,10 @@ class Table:
         :param hash_func: hash function to use
         :param rehash_type: rehash type to use
         """
-        self.table = [None] * table_size
+        self.table_size = table_size
+        self.table = [None] * self.table_size
         self.hash_func = hash_func
         self.rehash_type = rehash_type
-        self.size = 0
         self.rehash_count = 0
 
     def _rehash(self, key, i):
@@ -22,13 +28,13 @@ class Table:
         :return: rehashed key
         """
         if self.rehash_type == 'linear':
-            return (key + i) % len(self.table)
+            return (key + i) % self.table_size
         elif self.rehash_type == 'quadratic':
-            return (key + i ** 2) % len(self.table)
+            return (key + i * i) % self.table_size
         elif self.rehash_type == 'double':
-            h1 = self.hash_func(key)
-            h2 = 1 + (key % (len(self.table) - 1))
-            return (h1 + i * h2) % len(self.table)
+            hash1 = key % self.table_size
+            hash2 = 1 + (key % (self.table_size - 2))
+            return (hash1 + i * hash2) % self.table_size
 
     def insert(self, key, value):
         """
@@ -38,18 +44,20 @@ class Table:
         :param value: value to insert
         :return: True if successful, False otherwise
         """
-        pos = self.hash_func(key)
-        if self.table[pos] is None or self.table[pos] == value:
-            self.table[pos] = value
-            self.size += 1
-            return True
-        else:
-            for key in self.table:
-                if key is None:
-                    self.table[pos] = value
-                    self.size += 1
-                    return True
-            raise Exception('Table is full')
+        i = 0
+        while i < self.table_size:
+            hashed_key = self.hash_func(key)
+            rehashed_key = self._rehash(hashed_key, i)
+            if self.table[rehashed_key] is None:
+                self.table[rehashed_key] = (key, value)
+                return True
+            elif self.table[rehashed_key][0] == key:
+                self.table[rehashed_key] = (key, value)
+                return True
+            else:
+                i += 1
+                self.rehash_count += 1
+        return False
 
     def delete(self, key):
         """
@@ -57,12 +65,18 @@ class Table:
 
         :param key: key to delete
         """
-        pos = self.hash_func(key)
-        if self.table[pos] is None:
-            return False
-        self.table[pos] = None
-        self.size -= 1
-        return True
+        i = 0
+        while i < self.table_size:
+            hashed_key = self.hash_func(key)
+            rehashed_key = self._rehash(hashed_key, i)
+            if self.table[rehashed_key] is None:
+                return
+            elif self.table[rehashed_key][0] == key:
+                self.table[rehashed_key] = None
+                return
+            else:
+                i += 1
+        return
 
     def exist(self, key):
         """
@@ -71,10 +85,17 @@ class Table:
         :param key: key to check
         :return: True if key exists, False otherwise
         """
-        pos = self.hash_func(key)
-        if self.table[pos] is None:
-            return False
-        return self.table[pos] is not None
+        i = 0
+        while i < self.table_size:
+            hashed_key = self.hash_func(key)
+            rehashed_key = self._rehash(hashed_key, i)
+            if self.table[rehashed_key] is None:
+                return False
+            elif self.table[rehashed_key][0] == key:
+                return True
+            else:
+                i += 1
+        return False
 
     def value(self, key):
         """
@@ -83,8 +104,17 @@ class Table:
         :param key: key to check
         :return: value associated with key
         """
-        pos = self.hash_func(key)
-        return self.table[pos]
+        i = 0
+        while i < self.table_size:
+            hashed_key = self.hash_func(key)
+            rehashed_key = self._rehash(hashed_key, i)
+            if self.table[rehashed_key] is None:
+                return None
+            elif self.table[rehashed_key][0] == key:
+                return self.table[rehashed_key][1]
+            else:
+                i += 1
+        return None
 
     def union(self, other_table):
         """
@@ -93,12 +123,19 @@ class Table:
         :param other_table: other table to union with
         :return: new table that is the union of the current table and the other table
         """
-        union_table = Table(len(self.table), self.hash_func, self.rehash_type)
-        for i in range(self.size):
+        # Create a new table with the same size and hash function as the current table
+        union_table = Table(self.table_size, self.hash_func, self.rehash_type)
+
+        # Add all the elements from the current table to the new table
+        for i in range(self.table_size):
             if self.table[i] is not None:
-                union_table.insert(i, self.table[i])
+                union_table.insert(self.table[i][0], self.table[i][1])
+
+        # Add all the elements from the other table to the new table
+        for i in range(other_table.table_size):
             if other_table.table[i] is not None:
-                union_table.insert(i, other_table.table[i])
+                union_table.insert(other_table.table[i][0], other_table.table[i][1])
+
         return union_table
 
     def intersection(self, other_table):
@@ -108,17 +145,22 @@ class Table:
         :param other_table: other table to intersect with
         :return: new table that is the intersection of the current table and the other table
         """
-        intersection_table = Table(len(self.table), self.hash_func, self.rehash_type)
-        for i in range(self.size):
-            if self.table[i] is not None and other_table.table[i] is not None:
-                intersection_table.insert(i, self.table[i])
+        # Create a new table with the same size and hash function as the current table
+        intersection_table = Table(self.table_size, self.hash_func, self.rehash_type)
+
+        # Add elements to the new table only if they exist in both tables
+        for i in range(self.table_size):
+            if self.table[i] is not None and other_table.exist(self.table[i][0]):
+                intersection_table.insert(self.table[i][0], self.table[i][1])
+
         return intersection_table
 
     def display(self):
         """
         Displays the table
         """
-        print('Table: {}'.format(self.table))
+        for i in range(self.table_size):
+            print(f"{i}: {self.table[i]}")
 
 
 def test_table(size=5, hash_func=lambda x: x % 5, rehash_type='linear'):
@@ -129,44 +171,123 @@ def test_table(size=5, hash_func=lambda x: x % 5, rehash_type='linear'):
     :param hash_func: hash function to use
     :param rehash_type: rehash function to use
     """
-    # Create table with size 5, hash function f(x) = x % 5, and linear rehashing
+
+    # create a new table object
     table = Table(size, hash_func, rehash_type)
 
-    # Insert key/value pairs
-    for i in range(5):
-        table.insert(i, i)
-    assert table.size == 5
-    assert table.rehash_count == 0
-    assert table.table == [0, 1, 2, 3, 4]
+    # test insert method
+    assert table.insert(10, "value1") is True
+    assert table.insert(5, "value2") is True
+    assert table.insert(20, "value3") is True
 
-    # Delete key/value pairs
-    for i in range(5):
-        table.delete(i)
-    assert table.size == 0
-    assert table.rehash_count == 0
-    assert table.table == [None, None, None, None, None]
+    # test exist method
+    assert table.exist(10) is True
+    assert table.exist(5) is True
+    assert table.exist(20) is True
+    assert table.exist(15) is False
 
-    # Check if key exists
-    for i in range(5):
-        table.insert(i, i)
-        assert table.exist(i) is True
-    assert table.size == 5
-    assert table.rehash_count == 0
+    # test value method
+    assert table.value(10) is "value1"
+    assert table.value(5) is "value2"
+    assert table.value(20) is "value3"
+    assert table.value(15) is None
 
-    # Check value of key
-    for i in range(5):
-        assert table.value(i) == i
+    # test delete method
+    table.delete(10)
+    assert table.exist(10) is False
+    assert table.value(10) is None
 
-    # Check union of two tables
-    table2 = Table(size, hash_func, rehash_type)
-    for i in range(1, 6):
-        table2.insert(i, i)
-    union_table = table.union(table2)
-    union_table.display()
+    # create another table object
+    other_table = Table(size, hash_func, rehash_type)
+    other_table.insert(5, "other_value1")
+    other_table.insert(15, "other_value2")
+    other_table.insert(25, "other_value3")
 
-    # Check intersection of two tables
-    intersection_table = table2.intersection(table)
-    intersection_table.display()
+    # test union method
+    union_table = table.union(other_table)
+    assert union_table.exist(5) is True
+    assert union_table.exist(15) is True
+    assert union_table.exist(20) is True
+    assert union_table.exist(25) is True
+
+    # test intersection method
+    intersection_table = table.intersection(other_table)
+    assert intersection_table.exist(5) is True
+    assert intersection_table.exist(15) is False
+    assert intersection_table.exist(20) is False
+    assert intersection_table.exist(25) is False
+
+    # test display method
+    table.display()
 
 
-test_table(size=5, hash_func=lambda x: x % 5, rehash_type='linear')
+result = {
+    'linear': {},
+    'quadratic': {},
+    'double': {}
+}
+
+
+# Test the Table class with rehashing
+def test_rehashing(n, rehash_type='linear'):
+    """
+    test the Table class with rehashing
+
+    :param n: number of elements to insert
+    :param rehash_type: rehash function to use
+    """
+    # Create a table with size 10
+    table = Table(10, lambda x: x % 10, rehash_type)
+
+    # Insert n random elements
+    for i in range(n):
+        key = random.randint(0, 100)
+        value = i
+        table.insert(key, value)
+
+    # Time the search for all n elements
+    start_time = time.time()
+    for i in range(n):
+        key = random.randint(0, 100)
+        table.value(key)
+    end_time = time.time()
+
+    result[rehash_type].update({
+        n: {
+            'table_size': table.table_size,
+            'number_of_elements': n,
+            'total_time': end_time - start_time,
+            'average_time_per_search': (end_time - start_time) / n
+        }
+    })
+
+
+list_rehash_types = ['linear', 'quadratic', 'double']
+for rehash_type in list_rehash_types:
+    for i in tqdm(range(1, 100000, 1000), desc=f'Progress for {rehash_type} rehashing'):
+        test_rehashing(i, rehash_type)
+
+linear_data = []
+quadratic_data = []
+double_data = []
+
+for method in tqdm(['linear', 'quadratic', 'double'], desc='Plotting'):
+    data = []
+    for key in range(1, 100000, 1000):
+        data.append([key, result[method][key]['number_of_elements'], result[method][key]['total_time']])
+    if method == 'linear':
+        linear_data = data
+    elif method == 'quadratic':
+        quadratic_data = data
+    elif method == 'double':
+        double_data = data
+
+plt.plot([x[1] for x in linear_data], [x[2] for x in linear_data], label='linear')
+plt.plot([x[1] for x in quadratic_data], [x[2] for x in quadratic_data], label='quadratic')
+plt.plot([x[1] for x in double_data], [x[2] for x in double_data], label='double')
+
+plt.xlabel('Number of insertions')
+plt.ylabel('Total time (s)')
+plt.title('Hashing performance')
+plt.legend()
+plt.show()
