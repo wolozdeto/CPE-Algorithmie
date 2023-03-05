@@ -229,7 +229,7 @@ result = {
 
 
 # Test the Table class with rehashing
-def test_rehashing(n, rehash_type='linear'):
+def test_rehashing(n, rehash_type='linear', table_size=100):
     """
     test the Table class with rehashing
 
@@ -237,57 +237,86 @@ def test_rehashing(n, rehash_type='linear'):
     :param rehash_type: rehash function to use
     """
     # Create a table with size 10
-    table = Table(10, lambda x: x % 10, rehash_type)
+    table = Table(table_size, lambda x: x % 10, rehash_type)
 
     # Insert n random elements
+    insert_start_time = time.time()
     for i in range(n):
         key = random.randint(0, 100)
         value = i
         table.insert(key, value)
+    insert_end_time = time.time()
 
     # Time the search for all n elements
-    start_time = time.time()
+    search_start_time = time.time()
     for i in range(n):
         key = random.randint(0, 100)
         table.value(key)
-    end_time = time.time()
+    search_end_time = time.time()
 
     result[rehash_type].update({
         n: {
             'table_size': table.table_size,
             'number_of_elements': n,
-            'total_time': end_time - start_time,
-            'average_time_per_search': (end_time - start_time) / n
+            'search_time': search_end_time - search_start_time,
+            'insert_time': insert_end_time - insert_start_time,
+            'average_time_per_search': (search_end_time - search_start_time) / n,
+            'rehash_count': table.rehash_count,
         }
     })
 
 
-list_rehash_types = ['linear', 'quadratic', 'double']
-for rehash_type in list_rehash_types:
-    for i in tqdm(range(1, 100000, 1000), desc=f'Progress for {rehash_type} rehashing'):
-        test_rehashing(i, rehash_type)
+for table_size in [10, 100, 1000, 5000, 10000]:
 
-linear_data = []
-quadratic_data = []
-double_data = []
+    list_rehash_types = ['linear', 'quadratic', 'double']
+    for rehash_type in list_rehash_types:
+        for i in tqdm(range(1, 100000, 1000), desc=f'Progress for {rehash_type} rehashing with table size {table_size}'):
+            test_rehashing(i, rehash_type, table_size)
 
-for method in tqdm(['linear', 'quadratic', 'double'], desc='Plotting'):
-    data = []
-    for key in range(1, 100000, 1000):
-        data.append([key, result[method][key]['number_of_elements'], result[method][key]['total_time']])
-    if method == 'linear':
-        linear_data = data
-    elif method == 'quadratic':
-        quadratic_data = data
-    elif method == 'double':
-        double_data = data
+    linear_data = []
+    quadratic_data = []
+    double_data = []
 
-plt.plot([x[1] for x in linear_data], [x[2] for x in linear_data], label='linear')
-plt.plot([x[1] for x in quadratic_data], [x[2] for x in quadratic_data], label='quadratic')
-plt.plot([x[1] for x in double_data], [x[2] for x in double_data], label='double')
+    for method in ['linear', 'quadratic', 'double']:
+        data = []
+        for key in range(1, 100000, 1000):
+            data.append([key, result[method][key]['number_of_elements'], result[method][key]['search_time'], result[method][key]['insert_time'], result[method][key]['rehash_count']])
+        if method == 'linear':
+            linear_data = data
+        elif method == 'quadratic':
+            quadratic_data = data
+        elif method == 'double':
+            double_data = data
 
-plt.xlabel('Number of insertions')
-plt.ylabel('Total time (s)')
-plt.title('Hashing performance')
-plt.legend()
-plt.show()
+    plt.plot([x[1] for x in linear_data], [x[2] for x in linear_data], label='linear')
+    plt.plot([x[1] for x in quadratic_data], [x[2] for x in quadratic_data], label='quadratic')
+    plt.plot([x[1] for x in double_data], [x[2] for x in double_data], label='double')
+
+    plt.xlabel('Number of insertions')
+    plt.ylabel('Total time (s)')
+    plt.title(f'Search time performance by rehashing method for table size {table_size}')
+    plt.legend()
+    plt.show()
+
+    plt.plot([x[1] for x in linear_data], [x[3] for x in linear_data], label='linear')
+    plt.plot([x[1] for x in quadratic_data], [x[3] for x in quadratic_data], label='quadratic')
+    plt.plot([x[1] for x in double_data], [x[3] for x in double_data], label='double')
+
+    plt.xlabel('Number of insertions')
+    plt.ylabel('Total time (s)')
+    plt.title(f'Insert time performance by rehashing method for table size {table_size}')
+    plt.legend()
+    plt.show()
+
+    plt.plot([x[1] for x in linear_data], [x[4] for x in linear_data], label='linear')
+    plt.plot([x[1] for x in quadratic_data], [x[4] for x in quadratic_data], label='quadratic')
+    plt.plot([x[1] for x in double_data], [x[4] for x in double_data], label='double')
+
+    plt.xlabel('Number of insertions')
+    plt.ylabel('Total rehash count')
+    plt.title(f'Rehash count performance by rehashing method for table size {table_size}')
+    plt.legend()
+    plt.show()
+
+
+
