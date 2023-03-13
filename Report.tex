@@ -4,6 +4,7 @@
 \usepackage[T1]{fontenc}
 \usepackage{amsmath}
 \usepackage{listings}
+\usepackage{graphicx}
 \inputencoding{utf8}
 
 \title{Rapport de TP : Développement d'un module de table de hachage en Python}
@@ -132,21 +133,141 @@
 
     Le code source de la classe \texttt{Table} est disponible dans l'annexe~\ref{subsec:code}.
 
+    \newpage
     \section{Tests de performances}\label{sec:tests}
 
-
-
-
     \subsection{Prévisions}\label{subsec:previsions}
-    \subsection{Résultats}\label{subsec:resultats}
+
+    Nous prévoyons que les résultats démontreront que les méthodes de hachage quadratique et double hachage sont plus efficaces que la méthode de hachage linéaire sur des tables de hachage de taille moyenne et grande.
+    En effet, la méthode de hachage quadratique et double hachage devraient permettre de réduire le nombre de collisions, ce qui améliore les performances de la table de hachage.
+    En revanche, la méthode de hachage linéaire devrait être plus efficace sur des tables de hachage de taille petite, car elle ne nécessite pas de rehachage.
+    Les résultats devraient ainsi mettre en lumière les avantages et les inconvénients de chaque méthode de hachage.
+
     \subsection{Analyse}\label{subsec:analyse}
+
+    Les tests de performances ont été effectués sur un ordinateur portable équipé d'un processeur Intel Core i7-11800H, d'une mémoire vive de 31,7 Go et d'un ssd Samsung 980 Pro de 2 To.
+
+    Nous avons différents tests de performance afin d'évaluer l'efficacité des différentes méthodes de hachage proposées dans la classe \texttt{Table} (linéaire, quadratique et double hachage).
+    Les tests ont été réalisés sur des tables de taille variables : 10, 100, 1000 et 10000 éléments.
+    Les tests ont été effectués sur des clés aléatoires, comprises entre 0 et la taille de la table.
+    Les valeurs ajoutées sont des entiers aléatoires compris entre 0 et 100000 avec un pas de 1000.
+    Les tests mesures le temps d'exécution des opérations d'insertion, de suppression et de recherche.
+
+    Les résultats sont ensuite présentés au travers de graphiques afin de faciliter la compréhension des résultats.
+
+    Voici donc l'ensemble des graphiques obtenus pour les différentes méthodes de hachage, en fonction de la taille de la table :
+
+    \newpage
+
+    \begin{figure}
+        \centering
+        \begin{subfigure}
+            \includegraphics[width=\textwidth]{out/insert_time}
+            \caption{Insertion time for different hash methods.}
+            \label{fig:Insertion time}
+        \end{subfigure}
+        \hfill
+        \begin{subfigure}
+            \includegraphics[width=\textwidth]{out/search_time}
+            \caption{Search time for different hash methods.}
+            \label{fig:Search time}
+        \end{subfigure}
+        \hfill
+        \begin{subfigure}
+            \includegraphics[width=\textwidth]{out/rehash_count}
+            \caption{Rehash count for different hash methods.}
+            \label{fig:Rehash count}
+        \end{subfigure}
+        \caption{Performances graphs.}
+        \label{fig:performances graph}
+    \end{figure}
+
+    \newpage
+    Les graphiques montrent que pour petites tailles de tableau, les résultats des différentes méthodes de hachage se confonde.
+    En effet, pour des tailles de table de 10 ou 100, la différence de temps d'exécution entre les différentes méthodes de hachage est négligeable, qu'importe la méthode de rehachage utilisée.
+    En revanche, plus la taille de la table augmente, et plus le nombre de valeurs à insérer augmente, plus les différences de temps d'exécution entre les différentes méthodes de hachage deviennent significatives.
+    En effet, la méthode de hachage linéaire est la plus lente, sa courbe est relativement plate et se situe systématiquement au dessus des autres courbes.
+    La courbe semble suivre être parfaitement croissante et proportionnelle aux nombres d'éléments à insérer.
+    Les méthodes de hachage quadratique et double hachage sont plus rapides que la méthode linéaire, en effet leurs courbes sont moins régulières d'allure mais présente une croissance moins importante en fonction du nombre d'éléments à insérer.
+    Plus la taille de la table augmente, plus ces deux méthodes se distinguent de la méthode linéaire.
+    Entre ces deux méthodes, l'évolution est pratiquement similaire.
+    On peut tout de même constater que la méthode de hachage quadratique est légèrement plus rapide que la méthode de hachage double.
+    Cette évolution est par ailleurs progressiste : plus la taille de la table augmente, plus la méthode de hachage double se rapproche de la méthode de hachage quadratique.
+    Sur l'insertion, on constate une nette différence entre les 3 méthodes : la méthode de hachage linéaire est parfaitement plate, tandis que les deux autres méthodes présentes de nombreuses imperfections dans leur courbe dûe à la présence de collisions.
+
+    \subsection{Résultats}\label{subsec:resultats}
+
+    Comme prévu, les résultats démontrent que les méthodes de hachage quadratique et double hachage sont plus efficaces que la méthode de hachage linéaire et de manière significative.
+    Les temps d'exécutions de la méthode de hachage linéaire augmentent proportionnellement à la taille de la table et au nombre d'éléments à insérer, présentant une courbe parfaitement plate.
+    Les méthodes de hachage quadratique et double hachage, quant à elles, présentent des courbes plus irrégulières, mais moins croissantes.
+
+    Ainsi, on peut dire que la méthode de hachage quadratique est la plus viable et la plus efficace pour l'insertion, la suppression et la recherche.
+    La méthode de hachage double est également efficace, mais légèrement moins que la méthode de hachage quadratique.
+    En revanche, la méthode de hachage linéaire est la moins efficace, et ne devrait être utilisée que dans des cas très particuliers, où la taille de la table est très petite.
+
+    \newpage
     \section{Complexité algorithmique}\label{sec:complexite}
     \subsection{Définition}\label{subsec:def}
+    La complexité algorithmique est une mesure de la quantité de ressources (temps, mémoire, etc.) nécessaires pour exécuter un algorithme donné.
+    Elle permet d'évaluer l'efficacité d'un algorithme et de comparer différentes solutions algorithmiques pour un même problème.
+
+    Il existe deux types de complexité algorithmique : la complexité temporelle et la complexité spatiale.
+
+    La complexité temporelle mesure le temps nécessaire à l'exécution de l'algorithme en fonction de la taille de l'entrée (par exemple, le nombre d'éléments dans un tableau).
+    Elle est généralement exprimée en fonction de la notation de Landau, qui permet de caractériser la croissance de la fonction en fonction de la taille de l'entrée.
+    Les notations couramment utilisées incluent O(grand O), Ω(grand omega) et Θ(grand thêta).
+
+    La complexité spatiale mesure la quantité de mémoire nécessaire à l'exécution de l'algorithme en fonction de la taille de l'entrée.
+    Elle est également exprimée en fonction de la notation de Landau.
+
+    En général, on cherche à minimiser la complexité algorithmique pour obtenir des algorithmes efficaces qui peuvent traiter rapidement de grandes quantités de données avec un minimum de ressources.
+
     \subsection{Complexité de l'implémentation}\label{subsec:complexite}
+
+    La complexité algorithmique des méthodes de rehash dépend de la méthode utilisée.
+
+    Pour la méthode de rehash linéaire, la complexité temporelle est de O(1), car elle ne dépend pas de la taille de la table de hachage.
+
+    Pour la méthode de rehash quadratique, la complexité temporelle est de O(1) dans le meilleur des cas (lorsqu'il n'y a pas de collisions), mais elle peut être jusqu'à O(n) dans le pire des cas (lorsque la table de hachage est remplie à capacité maximale). En moyenne, la complexité temporelle est de O(1) si la table de hachage est bien dimensionnée.
+
+    Pour la méthode de rehash double, la complexité temporelle est de O(1) dans la plupart des cas, mais elle peut également atteindre O(n) si la table de hachage est remplie à capacité maximale.
+    La complexité spatiale de cette méthode est plus élevée que celle des deux autres méthodes, car elle utilise deux fonctions de hachage.
+
+    \newpage
     \section{Conclusion}\label{sec:conclusion}
+
     \subsection{Synthèse}\label{subsec:synthese}
+
+    Dans ce projet, nous avons implémenté la classe \texttt{Table} qui permet de créer une table de hachage.
+    En son sein, nous avons implémenté les méthodes de hachage linéaire, quadratique et double.
+    Nous avons ensuite comparé les performances de ces méthodes en termes de temps d'exécution pour l'insertion, la suppression et la recherche.
+    Nous avons également comparé les performances de ces méthodes en termes de complexité algorithmique.
+    Les résultats obtenus montrent que les méthodes de hachage quadratique et double hachage sont plus efficaces que la méthode de hachage linéaire.
+    La méthode de hachage linéaire est la moins efficace, et ne devrait être utilisée que dans des cas très particuliers, où la taille de la table est très petite.
+    La méthode de hachage quadratique est la plus viable et la plus efficace pour l'insertion, la suppression et la recherche.
+    En ce qui concerne la complexité algorithmique, on remarque que l'ensemble des méthodes de rehash ont une complexité temporelle de O(1) dans le meilleur des cas.
+    En revanche, la complexité temporelle peut être jusqu'à O(n) dans le cas de la méthode de rehash quadratique et de la méthode de rehash double si la table de hachage est remplie à capacité maximale.
+
     \subsection{Perspectives}\label{subsec:perspectives}
+
+    Afin d'améliorer cette étude et de l'approfondir, il serait intéressant de comparer les performances de ces méthodes de hachage avec d'autres méthodes de hachage existantes.
+    Il serait également intéressant de comparer les performances de ces méthodes de hachage avec d'autres structures de données telles que les arbres binaires de recherche, les arbres AVL, les arbres B, etc.
+    Enfin, il serait intéressant de comparer les performances de ces méthodes de hachage avec des algorithmes de tri tels que le tri par insertion, le tri par sélection, le tri par tas, etc.
+
     \subsection{limites}\label{subsec:limites}
+
+    Les limites de cette étude sont les suivantes :
+    \begin{itemize}
+        \item Les méthodes de hachage implémentées ne sont pas optimisées.
+        \item Nous évaluons uniquement les performances de ces méthodes de hachage en termes de temps d'exécution et de complexité algorithmique.
+        \item Nous n'avons pas comparé les performances de ces méthodes de hachage avec d'autres méthodes de hachage existantes.
+        \item Nous n'avons pas comparé les performances de ces méthodes de hachage avec d'autres structures de données.
+        \item Nous n'avons pas comparé les performances de ces méthodes de hachage avec des algorithmes de tri.
+        \item Nous n'avons pas évalué les performances de ces méthodes de hachage en termes de consommation de mémoire et ressources.
+        \item Nous n'avons pas évoqué les aspects de sécurité et de confidentialité des données (attaque de collision, attaque de preuve de travail, etc.)
+    \end{itemize}
+
+    \newpage
     \section{Annexes}\label{sec:annexes}
     \subsection{Code source}\label{subsec:code}
 

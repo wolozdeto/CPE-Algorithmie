@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.10 Portable) (preloaded format=pdflatex 2023.3.9)  10 MAR 2023 14:34
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.10 Portable) (preloaded format=pdflatex 2023.3.9)  13 MAR 2023 22:48
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -144,6 +144,33 @@ File: listings.cfg 2020/03/24 1.8d listings configuration
 ))
 Package: listings 2020/03/24 1.8d (Carsten Heinz)
 
+(C:\Users\woloz\scoop\apps\miktex\current\texmfs\install\tex/latex/graphics\gra
+phicx.sty
+Package: graphicx 2021/09/16 v1.2d Enhanced LaTeX Graphics (DPC,SPQR)
+
+(C:\Users\woloz\scoop\apps\miktex\current\texmfs\install\tex/latex/graphics\gra
+phics.sty
+Package: graphics 2022/03/10 v1.4e Standard LaTeX Graphics (DPC,SPQR)
+
+(C:\Users\woloz\scoop\apps\miktex\current\texmfs\install\tex/latex/graphics\tri
+g.sty
+Package: trig 2021/08/11 v1.11 sin cos tan (DPC)
+)
+(C:\Users\woloz\scoop\apps\miktex\current\texmfs\install\tex/latex/graphics-cfg
+\graphics.cfg
+File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
+)
+Package graphics Info: Driver file: pdftex.def on input line 107.
+
+(C:\Users\woloz\scoop\apps\miktex\current\texmfs\install\tex/latex/graphics-def
+\pdftex.def
+File: pdftex.def 2022/09/22 v1.2b Graphics/color driver for pdftex
+\stockwidth=\dimen152
+\stockheight=\dimen153
+))
+\Gin@req@height=\dimen154
+\Gin@req@width=\dimen155
+)
 (C:\Users\woloz\scoop\apps\miktex\current\texmfs\install\tex/latex/l3backend\l3
 backend-pdftex.def
 File: l3backend-pdftex.def 2022-09-28 L3 backend support: PDF output (pdfTeX)
@@ -152,23 +179,47 @@ File: l3backend-pdftex.def 2022-09-28 L3 backend support: PDF output (pdfTeX)
 ) (C:/Users\woloz\CPE-Algorithmie\out\Report.aux)
 \openout1 = `Report.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 14.
-LaTeX Font Info:    ... okay on input line 14.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 14.
-LaTeX Font Info:    ... okay on input line 14.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 14.
-LaTeX Font Info:    ... okay on input line 14.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 14.
-LaTeX Font Info:    ... okay on input line 14.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 14.
-LaTeX Font Info:    ... okay on input line 14.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 14.
-LaTeX Font Info:    ... okay on input line 14.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 14.
-LaTeX Font Info:    ... okay on input line 14.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 15.
+LaTeX Font Info:    ... okay on input line 15.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 15.
+LaTeX Font Info:    ... okay on input line 15.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 15.
+LaTeX Font Info:    ... okay on input line 15.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 15.
+LaTeX Font Info:    ... okay on input line 15.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 15.
+LaTeX Font Info:    ... okay on input line 15.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 15.
+LaTeX Font Info:    ... okay on input line 15.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 15.
+LaTeX Font Info:    ... okay on input line 15.
 \c@lstlisting=\count280
 
-(C:/Users\woloz\CPE-Algorithmie\out\Report.toc)
+(C:\Users\woloz\scoop\apps\miktex\current\texmfs\install\tex/context/base/mkii\
+supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count281
+\scratchdimen=\dimen156
+\scratchbox=\box56
+\nofMPsegments=\count282
+\nofMParguments=\count283
+\everyMPshowfont=\toks25
+\MPscratchCnt=\count284
+\MPscratchDim=\dimen157
+\MPnumerator=\count285
+\makeMPintoPDFobject=\count286
+\everyMPtoPDFconversion=\toks26
+)
+(C:\Users\woloz\scoop\apps\miktex\current\texmfs\install\tex/latex/epstopdf-pkg
+\epstopdf-base.sty
+Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
+Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
+85.
+
+(C:\Users\woloz\scoop\apps\miktex\current\texmfs\install\tex/latex/00miktex\eps
+topdf-sys.cfg
+File: epstopdf-sys.cfg 2021/03/18 v2.0 Configuration of epstopdf for MiKTeX
+)) (C:/Users\woloz\CPE-Algorithmie\out\Report.toc)
 \tf@toc=\write3
 \openout3 = `Report.toc'.
 
@@ -176,155 +227,287 @@ LaTeX Font Info:    ... okay on input line 14.
 
 {C:/Users/woloz/scoop/apps/miktex/current/texmfs/data/fonts/map/pdftex/pdftex.m
 ap}]
-Overfull \hbox (9.9411pt too wide) in paragraph at lines 22--28
+Overfull \hbox (9.9411pt too wide) in paragraph at lines 23--29
 \T1/cmr/m/n/10 L'utilisation de struc-tures de don-nées ef-fi-caces est un élé-
 ment clé dans le développe-
  []
 
 [2]
 LaTeX Font Info:    Trying to load font information for T1+cmtt on input line 5
-5.
+6.
 
 (C:\Users\woloz\scoop\apps\miktex\current\texmfs\install\tex/latex/base\t1cmtt.
 fd
 File: t1cmtt.fd 2019/12/16 v2.5j Standard LaTeX font definitions
 )
-Overfull \hbox (9.58621pt too wide) in paragraph at lines 55--56
+Overfull \hbox (9.58621pt too wide) in paragraph at lines 56--57
 []\T1/cmtt/m/n/10 init(taille_table, fonction_hachage, type_rehachage) \T1/cmr/
 m/n/10 - cette méth-
  []
 
 [3] [4]
-Overfull \hbox (0.52673pt too wide) in paragraph at lines 96--97
+Overfull \hbox (0.52673pt too wide) in paragraph at lines 97--98
 \T1/cmr/m/n/10 no-tam-ment \T1/cmtt/m/n/10 insert\T1/cmr/m/n/10 , \T1/cmtt/m/n/
 10 delete\T1/cmr/m/n/10 , \T1/cmtt/m/n/10 exist\T1/cmr/m/n/10 , \T1/cmtt/m/n/10
  value\T1/cmr/m/n/10 , \T1/cmtt/m/n/10 union\T1/cmr/m/n/10 , \T1/cmtt/m/n/10 in
 tersection \T1/cmr/m/n/10 et \T1/cmtt/m/n/10 affichage\T1/cmr/m/n/10 . 
  []
 
+[5] [6]
 
-LaTeX Warning: Reference `subsec:code' on page 5 undefined on input line 133.
+Report.tex:164: LaTeX Error: Environment subfigure undefined.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.164         \begin{subfigure}
+                               
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+<out/insert_time.png, id=28, 1740.9843pt x 344.0052pt>
+File: out/insert_time.png Graphic file (type png)
+<use out/insert_time.png>
+Package pdftex.def Info: out/insert_time.png  used on input line 165.
+(pdftex.def)             Requested size: 345.0pt x 68.16467pt.
+
+Report.tex:168: LaTeX Error: \begin{figure} on input line 162 ended by \end{sub
+figure}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.168         \end{subfigure}
+                             
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
 
 
+Report.tex:170: LaTeX Error: Environment subfigure undefined.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.170         \begin{subfigure}
+                               
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+<out/search_time.png, id=30, 1882.03125pt x 361.35pt>
+File: out/search_time.png Graphic file (type png)
+<use out/search_time.png>
+Package pdftex.def Info: out/search_time.png  used on input line 171.
+(pdftex.def)             Requested size: 345.0pt x 66.23666pt.
+
+Report.tex:174: LaTeX Error: \begin{figure} on input line 162 ended by \end{sub
+figure}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.174         \end{subfigure}
+                             
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+
+Report.tex:176: LaTeX Error: Environment subfigure undefined.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.176         \begin{subfigure}
+                               
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+<out/rehash_count.png, id=31, 1882.03125pt x 361.35pt>
+File: out/rehash_count.png Graphic file (type png)
+<use out/rehash_count.png>
+Package pdftex.def Info: out/rehash_count.png  used on input line 177.
+(pdftex.def)             Requested size: 345.0pt x 66.23666pt.
+
+Report.tex:180: LaTeX Error: \begin{figure} on input line 162 ended by \end{sub
+figure}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.180         \end{subfigure}
+                             
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+[7 <./out/insert_time.png> <./out/search_time.png> <./out/rehash_count.png>]
+[8]
+
+Report.tex:218: LaTeX Error: Unicode character Î© (U+03A9)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.218 ...amment utilisÃ©es incluent O(grand O), Î©
+                                                  (grand omega) et Î˜(grand ...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+Report.tex:218: LaTeX Error: Unicode character Î˜ (U+0398)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.218 ...ncluent O(grand O), Î©(grand omega) et Î˜
+                                                  (grand thÃªta).
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+Overfull \hbox (17.33185pt too wide) in paragraph at lines 216--219
+[]\T1/cmr/m/n/10 La com-plex-ité tem-porelle mesure le temps néces-saire à l'ex
+écution de l'algorithme
+ []
+
+
+Overfull \hbox (0.36377pt too wide) in paragraph at lines 220--222
+[]\T1/cmr/m/n/10 La com-plex-ité spa-tiale mesure la quan-tité de mé-moire néce
+s-saire à l'exécution
+ []
+
+[9] [10] [11]
 (C:\Users\woloz\scoop\apps\miktex\current\texmfs\install\tex/latex/listings\lst
 lang1.sty
 File: lstlang1.sty 2020/03/24 1.8d listings language file
-) [5]
-Overfull \hbox (8.91628pt too wide) in paragraph at lines 160--161
+)
+Overfull \hbox (8.91628pt too wide) in paragraph at lines 285--286
 [][][][][][][][][][][][][][][][][][] 
  []
 
-[6] [7] [8]
-Overfull \hbox (50.90634pt too wide) in paragraph at lines 273--274
+[12] [13]
+Overfull \hbox (50.90634pt too wide) in paragraph at lines 398--399
 [][][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
 
-Overfull \hbox (44.90776pt too wide) in paragraph at lines 277--278
+Overfull \hbox (44.90776pt too wide) in paragraph at lines 402--403
 [][][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
 
-Overfull \hbox (44.90776pt too wide) in paragraph at lines 280--281
+Overfull \hbox (44.90776pt too wide) in paragraph at lines 405--406
 [][][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
 
-Overfull \hbox (110.89215pt too wide) in paragraph at lines 282--284
+Overfull \hbox (110.89215pt too wide) in paragraph at lines 407--409
 [][][][][][][][][][][][][][][][][][][][][] 
  []
 
 
-Overfull \hbox (74.90067pt too wide) in paragraph at lines 284--285
+Overfull \hbox (74.90067pt too wide) in paragraph at lines 409--410
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
-
-Overfull \hbox (74.90067pt too wide) in paragraph at lines 287--289
+[14]
+Overfull \hbox (74.90067pt too wide) in paragraph at lines 412--414
 [][][][][][][][][][][][][][][][][][][][] 
  []
 
 
-Overfull \hbox (62.9035pt too wide) in paragraph at lines 289--290
+Overfull \hbox (62.9035pt too wide) in paragraph at lines 414--415
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
-[9]
-Overfull \hbox (92.89641pt too wide) in paragraph at lines 316--317
+
+Overfull \hbox (92.89641pt too wide) in paragraph at lines 441--442
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
-
-Overfull \hbox (86.89783pt too wide) in paragraph at lines 334--335
+[15]
+Overfull \hbox (86.89783pt too wide) in paragraph at lines 459--460
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
-[10]
-Overfull \hbox (14.91486pt too wide) in paragraph at lines 399--400
+[16]
+Overfull \hbox (14.91486pt too wide) in paragraph at lines 524--525
 [][][][][][][][][][][][][][][][][][] 
  []
 
-[11]
-Overfull \hbox (14.91486pt too wide) in paragraph at lines 408--410
+
+Overfull \hbox (14.91486pt too wide) in paragraph at lines 533--535
 [][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
-
-Overfull \hbox (32.9106pt too wide) in paragraph at lines 429--430
+[17]
+Overfull \hbox (32.9106pt too wide) in paragraph at lines 554--555
 [][][][][][][][][][][][][][] 
  []
 
 
-Overfull \hbox (32.9106pt too wide) in paragraph at lines 430--431
+Overfull \hbox (32.9106pt too wide) in paragraph at lines 555--556
 [][][][][][][][][][][][][][] 
  []
 
 
-Overfull \hbox (2.9177pt too wide) in paragraph at lines 432--433
+Overfull \hbox (2.9177pt too wide) in paragraph at lines 557--558
 [][][][][][][][][][][][][][][] 
  []
 
 
-Overfull \hbox (26.91202pt too wide) in paragraph at lines 437--439
+Overfull \hbox (26.91202pt too wide) in paragraph at lines 562--564
 [][][][][][][][][][][][][][][][][][][][][] 
  []
 
-[12]
-Overfull \hbox (32.9106pt too wide) in paragraph at lines 456--457
+
+Overfull \hbox (32.9106pt too wide) in paragraph at lines 581--582
 [][][][][][][][][][][][][][][][] 
  []
 
-
-Overfull \hbox (20.91344pt too wide) in paragraph at lines 483--484
-[][][][][][][][][][][][][][][][][][][][][][] 
- []
-
-[13]
-Overfull \hbox (20.91344pt too wide) in paragraph at lines 503--504
+[18]
+Overfull \hbox (20.91344pt too wide) in paragraph at lines 608--609
 [][][][][][][][][][][][][][][][][][][][][][] 
  []
 
 
-Overfull \hbox (26.91202pt too wide) in paragraph at lines 523--524
+Overfull \hbox (20.91344pt too wide) in paragraph at lines 628--629
 [][][][][][][][][][][][][][][][][][][][][][] 
  []
 
-[14] (C:/Users\woloz\CPE-Algorithmie\out\Report.aux)
+[19]
+Overfull \hbox (26.91202pt too wide) in paragraph at lines 648--649
+[][][][][][][][][][][][][][][][][][][][][][] 
+ []
 
-LaTeX Warning: There were undefined references.
-
+[20] (C:/Users\woloz\CPE-Algorithmie\out\Report.aux)
 
 LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
 
  ) 
 Here is how much of TeX's memory you used:
- 3385 strings out of 475385
- 48339 string characters out of 2771698
- 627274 words of memory out of 3000000
- 24777 multiletter control sequences out of 15000+600000
+ 4230 strings out of 475385
+ 61890 string characters out of 2771698
+ 632160 words of memory out of 3000000
+ 25587 multiletter control sequences out of 15000+600000
  480224 words of font info for 53 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 54i,6n,62p,409b,1775s stack positions out of 10000i,1000n,20000p,200000b,80000s
+ 55i,6n,62p,409b,1773s stack positions out of 10000i,1000n,20000p,200000b,80000s
  <C:\Users\woloz\scoop\apps\miktex\current\texmfs/data\fonts/pk/ljfour/jknapp
 en/ec/dpi600\tcti1000.pk> <C:\Users\woloz\scoop\apps\miktex\current\texmfs/data
 \fonts/pk/ljfour/jknappen/ec/dpi600\ecti1000.pk> <C:\Users\woloz\scoop\apps\mik
@@ -338,10 +521,10 @@ coop\apps\miktex\current\texmfs/data\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx100
 appen/ec/dpi600\ecbx1440.pk> <C:\Users\woloz\scoop\apps\miktex\current\texmfs/d
 ata\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1200.pk> <C:\Users\woloz\scoop\apps\
 miktex\current\texmfs/data\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1728.pk>
-Output written on C:/Users\woloz\CPE-Algorithmie\out\Report.pdf (14 pages, 1369
-12 bytes).
+Output written on C:/Users\woloz\CPE-Algorithmie\out\Report.pdf (20 pages, 4483
+26 bytes).
 PDF statistics:
- 391 PDF objects out of 1000 (max. 8388607)
+ 421 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 1 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 16 words of extra memory for PDF output out of 10000 (max. 10000000)
 
